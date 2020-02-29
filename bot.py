@@ -27,7 +27,7 @@ if __name__ == '__main__':
             time.sleep(sleep_time)
             print('going to sleep for ', sleep_time)
             continue
-
+        print('yey, another one', len(tweets))
         for tweet in tweets:
             try:
                 tweet.favorite()
