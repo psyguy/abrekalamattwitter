@@ -24,7 +24,7 @@ if __name__ == '__main__':
             except:
                 pass
             try:
-                new_since_id = max(tweet.id, new_since_id)
+                new_since_id = max(tweet.id+1, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 save_word_cloud(tweet.user.screen_name, api)
                 api.update_with_media(word_cloud_address, status='#ابرکلمات‌ شما خدمت شما عزیز!',
