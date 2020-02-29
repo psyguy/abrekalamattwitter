@@ -35,18 +35,16 @@ if __name__ == '__main__':
                 pass
             robot_name = 'abrekalamatfa'
             try:
+                user_name = tweet.user.screen_name
                 if tweet.text.find(robot_name) == -1 or (
                         tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(robot_name) <= 1):
 
-                    api.update_status('اگر دوست دارید برای شما هم ابرکلمات ترسیم بشه کافیه یه ریپلای به همین پیام بدهید. متشکرم.',in_reply_to_status_id=tweet.id)
-                    time.sleep(40)
                     continue
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
-                user_name = tweet.user.screen_name
                 last_time = ProcessedUserNames.give_last_time(user_name)
                 ProcessedUserNames.create_last_time(user_name)
-                if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 10:
+                if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 1:
                     continue
 
                 save_word_cloud(user_name, api)
