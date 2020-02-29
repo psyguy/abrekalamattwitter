@@ -3,11 +3,13 @@ import traceback
 
 import tweepy
 
-from db import ProcessStat
+from db import ProcessStat, ProcessedUserNames
 from make_word_cloud import save_word_cloud, word_cloud_address
 from tokens import *
 
 # Authenticate to Twitter
+from utils import get_time_in_iran_timezone, make_aware
+
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
@@ -32,10 +34,17 @@ if __name__ == '__main__':
                 tweet.favorite()
             except:
                 pass
+            if tweet.in_reply_to_screen_name != 'abrekalamatfa':
+                continue
             try:
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 user_name = tweet.user.screen_name
+                last_time = ProcessedUserNames.give_last_time(user_name)
+                ProcessedUserNames.create_last_time(user_name)
+                if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 60*60:
+                    continue
+
                 save_word_cloud(user_name, api)
                 api.update_with_media(word_cloud_address,
                                       status='#ابرکلمات‌ شما خدمت شما' + '@' + str(user_name) + ' عزیز!',

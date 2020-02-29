@@ -1,8 +1,10 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.orm.session import Session as SessionClass
 from sqlalchemy.util.compat import contextmanager
+
+from utils import get_time_in_iran_timezone
 
 engine = create_engine('sqlite:///abrekalamt.db')
 Session = scoped_session(sessionmaker(bind=engine))
@@ -26,6 +28,7 @@ class ProcessStat(Base):
             x = session.query(ProcessStat).filter_by(bot_name=ProcessStat.const_bot_name).first()
             if not x:
                 session.add(ProcessStat(since_id, ProcessStat.const_bot_name))
+                return
             x.since_id = since_id
 
     @staticmethod
@@ -36,6 +39,34 @@ class ProcessStat(Base):
                 ProcessStat.create_since_id(1)
                 return 1
             return x.since_id
+
+
+class ProcessedUserNames(Base):
+    __tablename__ = 'processed_user_names'
+    user_name = Column(String, primary_key=True)
+    last_time = Column(DateTime)
+
+    def __init__(self, user_name: str):
+        self.user_name = user_name
+        self.last_time = get_time_in_iran_timezone()
+
+    @staticmethod
+    def create_last_time(user_name: str):
+        with session_scope() as session:  # type: SessionClass
+            x = session.query(ProcessedUserNames).filter_by(user_name=user_name).first()
+            if not x:
+                session.add(ProcessedUserNames(user_name))
+                return
+            x.last_time = get_time_in_iran_timezone()
+
+    @staticmethod
+    def give_last_time(user_name):
+        with session_scope() as session:  # type: SessionClass
+            x = session.query(ProcessedUserNames).filter_by(user_name=user_name).first()
+            if not x:
+                ProcessedUserNames.create_last_time(user_name)
+                return -1
+            return x.last_time
 
 
 @contextmanager
