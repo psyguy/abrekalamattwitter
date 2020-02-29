@@ -36,10 +36,10 @@ if __name__ == '__main__':
             robot_name = 'abrekalamatfa'
             try:
                 user_name = tweet.user.screen_name
-                if tweet.text.find(robot_name) == -1 or (
-                        tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(robot_name) <= 1):
-
-                    continue
+                if tweet.text.find(robot_name) == -1 or (tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(robot_name) <= 1):
+                        at_sign = '@'+str(user_name)
+                        api.update_status(at_sign+' عزیز اگر دوست دارید برای شما هم ابرکلمات ترسیم بشه کافیه یه ریپلای به همین پیام بدهید. متشکرم.',in_reply_to_status_id=tweet.id)
+                        continue
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 last_time = ProcessedUserNames.give_last_time(user_name)
