@@ -9,4 +9,5 @@ def get_time_in_iran_timezone() -> datetime:
 
 
 def make_aware(db_date: datetime) -> datetime:
-    return db_date.replace(tzinfo=pytz.utc).astimezone(timezone('Iran'))
+    tz = timezone('Iran')
+    return tz.localize(db_date)
