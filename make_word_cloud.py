@@ -31,8 +31,6 @@ def save_word_cloud(user_name: str, api):
     raw_tweets = []
     for tweet in tweepy.Cursor(api.user_timeline, id=user_name).items():
         raw_tweets.append(tweet.text)
-    print(raw_tweets)
-    print(len(raw_tweets))
 
     # Normalize words
     tokenizer = WordTokenizer()
