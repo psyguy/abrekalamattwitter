@@ -66,3 +66,4 @@ def save_word_cloud(user_name: str, api):
     wc = word_cloud.generate(clean_string)
     image = wc.to_image()
     image.save(word_cloud_address)
+
