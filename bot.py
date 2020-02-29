@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
                 save_word_cloud(user_name, api)
                 api.update_with_media(word_cloud_address,
-                                      status='#ابرکلمات‌ شما خدمت شما' + '@' + str(user_name) + ' عزیز! ',
+                                      status='#ابرکلمات‌ شما خدمت شما' + '@' + str(user_name) + ' عزیز! چطوره این پیامو ریتوییت کنی تا بقیه هم ببینند! هر کس به همین پیام هم ریپلای بده براش ابر کلمات ترسیم میشه!',
                                       in_reply_to_status_id=tweet.id)
                 if not tweet.user.following:
                     tweet.user.follow()
