@@ -6,7 +6,6 @@ import tweepy
 from db import ProcessStat, ProcessedUserNames
 from make_word_cloud import save_word_cloud, word_cloud_address
 from tokens import *
-
 # Authenticate to Twitter
 from utils import get_time_in_iran_timezone, make_aware
 
@@ -14,7 +13,8 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 # Create API object
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True,
+                 wait_on_rate_limit_notify=True)
 
 if __name__ == '__main__':
     sleep_time = 60
@@ -26,6 +26,7 @@ if __name__ == '__main__':
             traceback.print_exc()
             time.sleep(sleep_time)
             sleep_time *= 2
+            print('going to sleep for ', sleep_time)
             sleep_time = min(sleep_time, 60*60*2)
             continue
 
@@ -54,4 +55,4 @@ if __name__ == '__main__':
                 traceback.print_exc()
                 pass
             time.sleep(60)
-        time.sleep(60)
+        time.sleep(180)
