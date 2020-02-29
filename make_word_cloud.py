@@ -67,5 +67,4 @@ def save_word_cloud(user_name: str, api):
                              no_reshape=True)
     wc = word_cloud.generate(clean_string)
     image = wc.to_image()
-    image.show()
     image.save(word_cloud_address)

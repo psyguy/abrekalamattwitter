@@ -26,6 +26,7 @@ class ProcessStat(Base):
             x = session.query(ProcessStat).filter_by(bot_name=ProcessStat.const_bot_name).first()
             if not x:
                 session.add(ProcessStat(since_id, ProcessStat.const_bot_name))
+            x.since_id = since_id
 
     @staticmethod
     def give_since_id():
