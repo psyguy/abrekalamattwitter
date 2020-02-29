@@ -35,8 +35,10 @@ if __name__ == '__main__':
             try:
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
-                save_word_cloud(tweet.user.screen_name, api)
-                api.update_with_media(word_cloud_address, status='#ابرکلمات‌ شما خدمت شما عزیز!',
+                user_name = tweet.user.screen_name
+                save_word_cloud(user_name, api)
+                api.update_with_media(word_cloud_address,
+                                      status='#ابرکلمات‌ شما خدمت شما' + '@' + str(user_name) + ' عزیز!',
                                       in_reply_to_status_id=tweet.id)
             except:
                 traceback.print_exc()
