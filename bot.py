@@ -15,9 +15,17 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 if __name__ == '__main__':
+    sleep_time = 60
     while True:
         new_since_id = ProcessStat.give_since_id()
-        tweets = api.mentions_timeline(since_id=new_since_id)
+        try:
+            tweets = api.mentions_timeline(since_id=new_since_id)
+        except:
+            traceback.print_exc()
+            time.sleep(sleep_time)
+            sleep_time *= 2
+            continue
+
         for tweet in tweets:
             try:
                 tweet.favorite()
