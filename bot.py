@@ -25,9 +25,7 @@ if __name__ == '__main__':
         except:
             traceback.print_exc()
             time.sleep(sleep_time)
-            sleep_time *= 2
             print('going to sleep for ', sleep_time)
-            sleep_time = min(sleep_time, 60*60*2)
             continue
 
         for tweet in tweets:
