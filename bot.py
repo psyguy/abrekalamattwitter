@@ -35,10 +35,6 @@ if __name__ == '__main__':
                 pass
             robot_name = 'abrekalamatfa'
             try:
-                if tweet.text.find(robot_name) == -1 or (
-                        tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(robot_name) <= 1):
-
-                    continue
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 user_name = tweet.user.screen_name
