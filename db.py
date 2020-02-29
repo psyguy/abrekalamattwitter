@@ -64,7 +64,6 @@ class ProcessedUserNames(Base):
         with session_scope() as session:  # type: SessionClass
             x = session.query(ProcessedUserNames).filter_by(user_name=user_name).first()
             if not x:
-                ProcessedUserNames.create_last_time(user_name)
                 return -1
             return x.last_time
 
