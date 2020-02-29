@@ -36,12 +36,19 @@ if __name__ == '__main__':
             robot_name = 'abrekalamatfa'
             try:
                 user_name = tweet.user.screen_name
-                if tweet.text.find(robot_name) == -1 or (tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(robot_name) <= 1):
-                        at_sign = '@'+str(user_name)
-                        if ProcessedUserNames.give_last_time(user_name) == -1:
-                            api.update_status(at_sign+' عزیز اگر دوست دارید برای شما هم ابرکلمات ترسیم بشه کافیه یه ریپلای به همین پیام بدهید. متشکرم.',in_reply_to_status_id=tweet.id)
-                            time.sleep(40)
-                        continue
+                if tweet.text.find(robot_name) == -1 or (
+                        tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(
+                    robot_name) <= 1):
+                    continue
+                s = api.show_friendship(source_screen_name=robot_name, target_screen_name=user_name)[1].following
+                if s == False:
+                    at_sign = '@' + str(user_name)
+                    api.update_status(
+                        at_sign + ' عزیز برای این توییتر ربات رو اسپم تشخیص نده لطفا ربات رو فالو کنید و به همین پیام هر ریپلایی دوست داشتید بزنید تا ابر کلماتتون رو دریافت کنید.',
+                        in_reply_to_status_id=tweet.id)
+                    time.sleep(40)
+                    continue
+
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 last_time = ProcessedUserNames.give_last_time(user_name)
@@ -53,8 +60,6 @@ if __name__ == '__main__':
                 api.update_with_media(word_cloud_address,
                                       status='#ابرکلمات‌ شما خدمت شما' + '@' + str(user_name) + ' عزیز! چطوره این پیامو ریتوییت کنی تا بقیه هم ببینند! هر کس به همین پیام هم ریپلای بده براش ابر کلمات ترسیم میشه!',
                                       in_reply_to_status_id=tweet.id)
-                if not tweet.user.following:
-                    tweet.user.follow()
             except:
                 traceback.print_exc()
                 pass
