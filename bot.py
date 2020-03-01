@@ -64,5 +64,5 @@ if __name__ == '__main__':
             except:
                 traceback.print_exc()
                 pass
-            time.sleep(60)
+            time.sleep(180)
         time.sleep(60)
