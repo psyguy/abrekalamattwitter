@@ -40,20 +40,12 @@ if __name__ == '__main__':
                         tweet.in_reply_to_screen_name is not None and tweet.in_reply_to_screen_name != robot_name and tweet.in_reply_to_screen_name != tweet.user.screen_name and tweet.text.count(
                     robot_name) <= 1):
                     continue
-                s = api.show_friendship(source_screen_name=robot_name, target_screen_name=user_name)[1].following
-                if s == False:
-                    at_sign = '@' + str(user_name)
-                    api.update_status(
-                        at_sign + 'دوست عزیز'+at_sign+' برای این که توییتر ربات رو اسپم تشخیص نده لطفا ربات رو فالو کنید و به همین پیام هر ریپلایی دوست داشتید بزنید تا ابر کلماتتون رو دریافت کنید.',
-                        in_reply_to_status_id=tweet.id)
-                    time.sleep(40)
-                    continue
 
                 new_since_id = max(tweet.id, new_since_id)
                 ProcessStat.create_since_id(since_id=new_since_id)
                 last_time = ProcessedUserNames.give_last_time(user_name)
                 ProcessedUserNames.create_last_time(user_name)
-                if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 60:
+                if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 60*60*48:
                     continue
 
                 save_word_cloud(user_name, api)
