@@ -51,7 +51,7 @@ if __name__ == '__main__':
                     ProcessStat.create_since_id(since_id=new_since_id)
                     last_time = ProcessedUserNames.give_last_time(user_name)
                     ProcessedUserNames.create_last_time(user_name)
-                    if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 60:
+                    if last_time != -1 and (get_time_in_iran_timezone() - make_aware(last_time)).total_seconds() < 60*60*2:
                         continue
 
                 save_word_cloud(user_name, api)
