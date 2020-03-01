@@ -56,11 +56,14 @@ if __name__ == '__main__':
 
                 save_word_cloud(user_name, api)
                 media_id = api.media_upload(word_cloud_address).media_id
-                api.update_status(status='ابر کلمات‌ شما خدمت شما' + '@' + str(
-                    user_name) + ' عزیز! چطوره این پیامو ریتوییت کنی تا بقیه هم ببینند! هر کس به همین پیام هم ریپلای بده براش ابر کلمات ترسیم میشه!' + str(
-                    user_name),
-                                  in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True,
-                                  media_ids=[media_id])
+                text = 'ابر کلمات‌ شما خدمت شما' + '@' + str(
+                    user_name) + ' عزیز! چطوره این پیامو ریتوییت کنی تا بقیه هم ببینند! راستی خواهشا یه پیام بهم بده که مطمین بشم توییتر اسپم تشخیص نداده و به دستت رسیده. اگر پیام ندی ممکنه کم کم توییتر ربات رو اسپم تشخیص بده و ببندتش.' + str(
+                    user_name)
+                try:
+                    api.send_direct_message(tweet.user.id, text, attachment_type='media', attachment_media_id=media_id)
+                except:
+                    api.update_status(status=text, in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True,
+                                      media_ids=[media_id])
             except:
                 traceback.print_exc()
                 pass
