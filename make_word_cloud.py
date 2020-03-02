@@ -12,15 +12,9 @@ from wordcloud_fa import WordCloudFa
 
 word_cloud_address = 'tweet.jpg'
 
-BACKGROUND_COLOR = "white"
+BACKGROUND_COLOR = "black"
 COLOR_MAP = "autumn"
-cmaps = ['viridis', 'plasma', 'inferno', 'magma', 'cividis',
-         'twilight', 'twilight_shifted', 'hsv',
-         'Pastel1', 'Pastel2', 'Paired', 'Accent',
-         'Dark2', 'Set1', 'Set2', 'Set3',
-         'gnuplot', 'gnuplot2', 'CMRmap', 'cubehelix', 'brg',
-         'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar',
-         'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+cmaps = ['autumn', 'winter', 'summer', 'Greens', 'Blues',
          ]
 
 FONT_PATH = "XTitre.TTF"
