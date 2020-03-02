@@ -44,8 +44,6 @@ if __name__ == '__main__':
                         robot_name) <= 1):
                         continue
                     s = api.show_friendship(source_screen_name=robot_name, target_screen_name=user_name)[1].following
-                    if s == False:
-                        continue
 
                     new_since_id = max(tweet.id, new_since_id)
                     ProcessStat.create_since_id(since_id=new_since_id)
