@@ -62,7 +62,7 @@ def save_word_cloud(user_name: str, api):
     clean_string = get_display(clean_string)
     word_cloud = WordCloudFa(persian_normalize=False, mask=mask, colormap=random.sample(cmaps, 1)[0],
                              background_color=BACKGROUND_COLOR, include_numbers=False, font_path=FONT_PATH,
-                             no_reshape=True, max_words=250, min_font_size=3)
+                             no_reshape=True, max_words=500, min_font_size=2)
     wc = word_cloud.generate(clean_string)
     image = wc.to_image()
     image.save(word_cloud_address)
