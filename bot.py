@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 save_word_cloud(user_name, api)
                 media_id = api.media_upload(word_cloud_address).media_id
                 text = 'ابر کلمات‌ شما خدمت شما' + '@' + str(
-                    user_name) + ' عزیز! چطوره این پیامو ریتوییت کنی تا بقیه هم ببینند! راستی خواهشا یه پیام بهم بده که مطمین بشم توییتر اسپم تشخیص نداده و به دستت رسیده. اگر پیام ندی ممکنه کم کم توییتر ربات رو اسپم تشخیص بده و ببندتش.' + str(
+                    user_name) + ' عزیز! چطوره عکسو با هشتگ #ابرکلمات توییت کنی و ربات رو منشن کنی تا بقیه هم ببینند! راستی خواهشا یه پیام بهم بده که مطمین بشم توییتر اسپم تشخیص نداده و به دستت رسیده. اگر پیام ندی ممکنه کم کم توییتر ربات رو اسپم تشخیص بده و ببندتش.' + str(
                     user_name)
                 try:
                     api.send_direct_message(tweet.user.id, text, attachment_type='media', attachment_media_id=media_id)
