@@ -14,12 +14,14 @@ word_cloud_address = 'tweet.jpg'
 
 BACKGROUND_COLOR = "white"
 COLOR_MAP = "autumn"
-cmaps = ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
-         'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
-         'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn',
-         'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
-         'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
-         'hot', 'afmhot', 'gist_heat', 'copper']
+cmaps = ['viridis', 'plasma', 'inferno', 'magma', 'cividis',
+         'twilight', 'twilight_shifted', 'hsv',
+         'Pastel1', 'Pastel2', 'Paired', 'Accent',
+         'Dark2', 'Set1', 'Set2', 'Set3',
+         'gnuplot', 'gnuplot2', 'CMRmap', 'cubehelix', 'brg',
+         'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar',
+         'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+         ]
 
 FONT_PATH = "XTitre.TTF"
 MASK_PATH = "mask.png"
