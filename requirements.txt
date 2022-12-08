@@ -1,6 +1,6 @@
 algorithm==1.2.0
 arabic-reshaper==2.0.15
-certifi==2019.11.28
+certifi==2022.12.7
 chardet==3.0.4
 cycler==0.10.0
 dependency-injection==1.2.0
